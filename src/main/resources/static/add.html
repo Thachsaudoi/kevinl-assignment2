@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="/addss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h1 class="text-center mt-5 mb-4">New User</h1>
+                <form action="/users/add" method="post" id="myForm" class="needs-validation" novalidate>
+                    <!-- POST METHOD IS TO SEND TO SERVER -->
+                    <div class="mb-3">
+                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="weight" name="weight" class="form-control form-control-lg" placeholder="Weight(lbs)" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="height" name="height" class="form-control form-control-lg" placeholder="Height(ft)" required>
+                    </div>
+                    <div class="mb-3 color">
+                        <div class="form-control form-control-lg haircolor">
+                            <label for="hair">Choose your hair color:</label>
+                            <input type="color" id="hair" name="hair" value="#0000ff" placeholder="Hair color" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="gpa" name="gpa" class="form-control form-control-lg" placeholder="GPA" required>
+                        <div class="invalid-feedback" id="gpaValidationFeedback"></div>
+                    </div>
+                    <!-- Submit button -->
+                    <div class="d-grid gap-2">
+                        <input class="btn btn-primary" type="submit" value="SEND" id="submitButton">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function(event) {
+            var form = document.getElementById("myForm");
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add("was-validated");
+            } else {
+                var gpaInput = document.getElementById("gpa");
+                var gpaValue = parseFloat(gpaInput.value);
+                if (gpaValue < 0 || gpaValue > 4) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    gpaInput.setCustomValidity("GPA must be between 0 and 4.3");
+                    document.getElementById("gpaValidationFeedback").textContent = "GPA must be between 0 and 4";
+                    form.classList.add("was-validated");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

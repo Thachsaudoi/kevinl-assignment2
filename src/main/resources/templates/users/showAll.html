@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/showss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/showss.css">
+</head>
+<body>
+    <main class="container-fluid">
+        <div class="outsidebox">
+            <ul>
+                <li th:each="user: ${us}" th:id="'user-' + ${user.uid}">
+                    <div th:style="'width: ' + ${user.weight} + 'px; height: ' + ${user.height} + 'px; border: 1px solid black;'" th:id="'student-' + ${user.uid}">
+                        <span th:style="'color: ' + ${user.hair}" th:text="${user.name}"></span>
+                        <span th:text="${user.gpa}"></span>
+
+                        <button class="open-button" th:attr="onclick='openForm(\'' + ${user.name} + '\', \'' + ${user.uid} + '\')'">Edit</button>
+                        
+                        <!-- The form -->
+                        <div class="form-popup" th:id="'myForm-' + ${user.uid}">
+                            <h2 id="form-heading">Form Heading</h2>
+                            <form th:action="@{'/users/' + ${user.uid} + '/save'}" method="post" class="needs-validation" novalidate>
+                                <input type="text" th:id="'name-' + ${user.uid}" name="name" required>
+                                <input type="number" th:id="'gpa-' + ${user.uid}" name="gpa" required>
+                                <input type="number" th:id="'weight-' + ${user.uid}" name="weight" required>
+                                <input type="number" th:id="'height-' + ${user.uid}" name="height" required>
+                                <input type="color" th:id="'hair-' + ${user.uid}" name="hair" placeholder="Hair color" required>
+                                <div>
+                                    <button type="submit">Save</button>
+                                    <button type="button" onclick="closeForm('${user.uid}')">Close</button>
+                                    
+                                </div>
+                            </form>                            
+                        </div>
+                        <form th:action="@{'/users/' + ${user.uid} + '/delete'}" method="post">
+                            <button type="submit">Delete</button>
+                          </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+    function openForm(userName, userId) {
+        document.getElementById("form-heading").textContent = userName + " Information";
+        document.getElementById("myForm-" + userId).style.display = "block";
+
+        // Get the user's data from the existing input fields
+        var name = document.getElementById("name-" + userId).value;
+        var gpa = document.getElementById("gpa-" + userId).value;
+        var weight = document.getElementById("weight-" + userId).value;
+        var height = document.getElementById("height-" + userId).value;
+        var hair = document.getElementById("hair-" + userId).value;
+
+        // Pre-fill the form fields with existing user information
+        document.getElementById("name-" + userId).value = name;
+        document.getElementById("gpa-" + userId).value = gpa;
+        document.getElementById("weight-" + userId).value = weight;
+        document.getElementById("height-" + userId).value = height;
+        document.getElementById("hair-" + userId).value = hair;
+    }
+    </script>
+
+    <script>
+    function closeForm(userId) {
+        document.getElementById("myForm-" + userId).style.display = "none";
+    }
+    </script>
+</body>
+</html>
