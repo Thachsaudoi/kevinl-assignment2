@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input type="number" id="gpa" name="gpa" class="form-control form-control-lg" placeholder="GPA" required>
+                        <input type="text" id="gpa" name="gpa" class="form-control form-control-lg" placeholder="GPA" required>
                         <div class="invalid-feedback" id="gpaValidationFeedback"></div>
                     </div>
                     <!-- Submit button -->
@@ -46,22 +46,23 @@
     <script>
         document.getElementById("submitButton").addEventListener("click", function(event) {
             var form = document.getElementById("myForm");
-            if (!form.checkValidity()) {
+            if (!form.reportValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
                 form.classList.add("was-validated");
             } else {
                 var gpaInput = document.getElementById("gpa");
                 var gpaValue = parseFloat(gpaInput.value);
-                if (gpaValue < 0 || gpaValue > 4) {
+                if (gpaValue < 0 || gpaValue > 4.3) {
                     event.preventDefault();
                     event.stopPropagation();
                     gpaInput.setCustomValidity("GPA must be between 0 and 4.3");
-                    document.getElementById("gpaValidationFeedback").textContent = "GPA must be between 0 and 4";
+                    document.getElementById("gpaValidationFeedback").textContent = "GPA must be between 0 and 4.3";
                     form.classList.add("was-validated");
                 }
             }
         });
     </script>
+    
 </body>
 </html>

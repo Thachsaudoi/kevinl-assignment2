@@ -1,13 +1,27 @@
+
 .outsidebox {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: flex-start; /* Align items to the right */
+  align-items: flex-start;
   border: 2px solid black;
   box-sizing: border-box;
   width: fit-content;
+  margin-bottom: 15px;
 }
 
+.outsidebox > ul > li {
+  flex-basis: 25%; /* Adjust the flex-basis value to adjust the number of columns */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end; /* Align items to the right within each column */
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  box-sizing: border-box;
+}
 .outsidebox > ul {
   display: flex;
   flex-wrap: wrap;
@@ -15,16 +29,6 @@
   margin: 0;
 }
 
-.outsidebox > ul > li {
-  flex-basis: 33%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
 
 .outsidebox > ul > li > div {
   display: flex;
@@ -46,4 +50,32 @@
   transform: translateX(-50%);
   border: 3px solid #f1f1f1;
   z-index: 9;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  background-color: inherit;
+}
+
+.open-button, #buttons {
+  height: 30px;
+  display: inline-block;
+  margin-left: 5px;
+}
+#userName{
+  font-size: 20px;
+}
+#userGPA{
+  font-size: 18px;
+}
+
+#goToAdd{
+  width: 150px;
+  font-size: 30px;
+  height: auto;
+  background-color: pink;
+  justify-content: center;
+  aligh
 }

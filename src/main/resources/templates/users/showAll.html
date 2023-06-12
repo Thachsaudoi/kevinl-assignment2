@@ -15,38 +15,48 @@
             <ul>
                 <li th:each="user: ${us}" th:id="'user-' + ${user.uid}">
                     <div th:style="'width: ' + ${user.weight} + 'px; height: ' + ${user.height} + 'px; border: 1px solid black;'" th:id="'student-' + ${user.uid}">
-                        <span th:style="'color: ' + ${user.hair}" th:text="${user.name}"></span>
-                        <span th:text="${user.gpa}"></span>
+                        <span th:style="'color: ' + ${user.hair}" th:text="${user.name}" id="userName" ></span>
+                        <span th:text="${user.gpa}" id="userGPA"></span>
+                        <div class="button-container">
+                            <button class="open-button" th:style="'background-color: ' + ${user.hair}" th:attr="onclick='openForm(\'' + ${user.name} + '\', \'' + ${user.uid} + '\')'" id="buttons">Edit</button>
 
-                        <button class="open-button" th:attr="onclick='openForm(\'' + ${user.name} + '\', \'' + ${user.uid} + '\')'">Edit</button>
-                        
                         <!-- The form -->
                         <div class="form-popup" th:id="'myForm-' + ${user.uid}">
                             <h2 id="form-heading">Form Heading</h2>
                             <form th:action="@{'/users/' + ${user.uid} + '/save'}" method="post" class="needs-validation" novalidate>
-                                <input type="text" th:id="'name-' + ${user.uid}" name="name" required>
-                                <input type="number" th:id="'gpa-' + ${user.uid}" name="gpa" required>
-                                <input type="number" th:id="'weight-' + ${user.uid}" name="weight" required>
-                                <input type="number" th:id="'height-' + ${user.uid}" name="height" required>
-                                <input type="color" th:id="'hair-' + ${user.uid}" name="hair" placeholder="Hair color" required>
-                                <div>
-                                    <button type="submit">Save</button>
-                                    <button type="button" onclick="closeForm('${user.uid}')">Close</button>
-                                    
+                                <input type="text" th:id="'name-' + ${user.uid}" name="name" required th:value="${user.name}">
+                                <input type="number" th:id="'gpa-' + ${user.uid}" name="gpa" required th:value="${user.gpa}">
+                                <input type="number" th:id="'weight-' + ${user.uid}" name="weight" required th:value="${user.weight}">
+                                <input type="number" th:id="'height-' + ${user.uid}" name="height" required th:value="${user.height}">
+                                <input type="color" th:id="'hair-' + ${user.uid}" name="hair" placeholder="Hair color" required th:value="${user.hair}">
+                                <div>   
+                                    <button type="submit" >Save</button>
+                                    <button type="button" th:onclick="'closeForm(\'' + ${user.uid} + '\', event)'">Close</button>
+
+
                                 </div>
                             </form>                            
                         </div>
                         <form th:action="@{'/users/' + ${user.uid} + '/delete'}" method="post">
-                            <button type="submit">Delete</button>
+                            <button type="submit" th:style="'background-color: ' + ${user.hair}" id="buttons">Delete</button>
+
                           </form>
+
+                        </div>
+                       
                     </div>
                 </li>
             </ul>
+            
         </div>
+        <form th:action="@{'/users/goToAdd'}" method="get">
+            <button type="submit"  id="goToAdd">Add User</button>
+        </form>
     </main>
 
     <script>
     function openForm(userName, userId) {
+        console.log("User ID:", userId);
         document.getElementById("form-heading").textContent = userName + " Information";
         document.getElementById("myForm-" + userId).style.display = "block";
 
@@ -64,12 +74,13 @@
         document.getElementById("height-" + userId).value = height;
         document.getElementById("hair-" + userId).value = hair;
     }
-    </script>
-
-    <script>
-    function closeForm(userId) {
+    function closeForm(userId, event) {
+        console.log("User ID:", userId);
         document.getElementById("myForm-" + userId).style.display = "none";
+        event.preventDefault();
     }
     </script>
+
+ 
 </body>
 </html>

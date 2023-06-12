@@ -85,6 +85,10 @@ public class StudentController {
         studentRepository.deleteById(uid);
         return  "redirect:/users/view";
     }
+    @GetMapping("/users/goToAdd")
+    public String goToAdd(Model model){
+        return "redirect:/add.html";
+    }
 
 
 }
