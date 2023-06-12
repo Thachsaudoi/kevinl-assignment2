@@ -16,7 +16,9 @@
                 <li th:each="user: ${us}" th:id="'user-' + ${user.uid}">
                     <div th:style="'width: ' + ${user.weight} + 'px; height: ' + ${user.height} + 'px; border: 1px solid black;'" th:id="'student-' + ${user.uid}">
                         <span th:style="'color: ' + ${user.hair}" th:text="${user.name}" id="userName" ></span>
-                        <span th:text="${user.gpa}" id="userGPA"></span>
+                        <span id="userGPA">
+                            <b th:text="${user.gpa}"></b>
+                        </span>
                         <div class="button-container">
                             <button class="open-button" th:style="'background-color: ' + ${user.hair}" th:attr="onclick='openForm(\'' + ${user.name} + '\', \'' + ${user.uid} + '\')'" id="buttons">Edit</button>
 
