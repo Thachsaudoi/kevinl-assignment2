@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="stylesheet" type="text/css" href="/addss.css">
+    <link rel="stylesheet" type="text/css" href="addss.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
@@ -22,7 +22,7 @@
                         <input type="number" id="weight" name="weight" class="form-control form-control-lg" placeholder="Weight(lbs)" required>
                     </div>
                     <div class="mb-3">
-                        <input type="number" id="height" name="height" class="form-control form-control-lg" placeholder="Height(ft)" required>
+                        <input type="number" id="height" name="height" class="form-control form-control-lg" placeholder="Height(cm)" required>
                     </div>
                     <div class="mb-3 color">
                         <div class="form-control form-control-lg haircolor">
@@ -31,37 +31,47 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input type="text" id="gpa" name="gpa" class="form-control form-control-lg" placeholder="GPA" required>
+                        <input type="number" id="gpa" name="gpa" class="form-control form-control-lg" placeholder="GPA" min="0" max="4.33" step="0.01" required>
+
                         <div class="invalid-feedback" id="gpaValidationFeedback"></div>
                     </div>
                     <!-- Submit button -->
                     <div class="d-grid gap-2">
-                        <input class="btn btn-primary" type="submit" value="SEND" id="submitButton">
+                        <input class="btn btn-primary" type="submit" value="ADD" id="submitButton">
                     </div>
+                </form>
+                <form action="/users/viewAll" method="get">
+                    <button type="submit" id="viewButton">View All Students</button>
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById("submitButton").addEventListener("click", function(event) {
-            var form = document.getElementById("myForm");
-            if (!form.reportValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-                form.classList.add("was-validated");
-            } else {
-                var gpaInput = document.getElementById("gpa");
-                var gpaValue = parseFloat(gpaInput.value);
-                if (gpaValue < 0 || gpaValue > 4.3) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    gpaInput.setCustomValidity("GPA must be between 0 and 4.3");
-                    document.getElementById("gpaValidationFeedback").textContent = "GPA must be between 0 and 4.3";
-                    form.classList.add("was-validated");
-                }
-            }
-        });
+document.getElementById("submitButton").addEventListener("click", function(event) {
+    var form = document.getElementById("myForm");
+    if (!form.reportValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add("was-validated");
+    } else {
+        var gpaInput = document.getElementById("gpa");
+        var gpaValue = parseFloat(gpaInput.value);
+        if (gpaValue < 0 || gpaValue > 4.33) {
+            event.preventDefault();
+            event.stopPropagation();
+            gpaInput.setCustomValidity("GPA must be between 0 and 4.33");
+            document.getElementById("gpaValidationFeedback").textContent = "GPA must be between 0 and 4.33";
+            form.classList.add("was-validated");
+        } else {
+            gpaInput.setCustomValidity("");
+            document.getElementById("gpaValidationFeedback").textContent = "";
+        }
+    }
+});
+
+
+
     </script>
     
 </body>

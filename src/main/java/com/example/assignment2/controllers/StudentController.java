@@ -89,6 +89,11 @@ public class StudentController {
     public String goToAdd(Model model){
         return "redirect:/add.html";
     }
-
+    @GetMapping("/users/viewAll")
+    public String goToViewAll(Model model) {
+        List<Student> users = studentRepository.findAll();
+        model.addAttribute("us", users);
+        return "redirect:/users/view";
+    }
 
 }
