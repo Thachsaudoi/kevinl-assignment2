@@ -1,8 +1,7 @@
-
 .outsidebox {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Align items to the right */
+  justify-content: flex-start;
   align-items: flex-start;
   border: 2px solid black;
   box-sizing: border-box;
@@ -11,24 +10,24 @@
 }
 
 .outsidebox > ul > li {
-  flex-basis: 25%; /* Adjust the flex-basis value to adjust the number of columns */
+  flex-basis: 25%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end; /* Align items to the right within each column */
+  justify-content: flex-end;
   margin-bottom: 10px;
   margin-right: 10px;
   margin-top: 10px;
   margin-left: 10px;
   box-sizing: border-box;
 }
+
 .outsidebox > ul {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
 }
-
 
 .outsidebox > ul > li > div {
   display: flex;
@@ -44,6 +43,7 @@
 
 .form-popup {
   display: none;
+  background-color: bisque;
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -59,22 +59,29 @@
   background-color: inherit;
 }
 
-.open-button, #buttons {
+.open-button,
+#buttons {
   height: 30px;
   display: inline-block;
   margin-left: 5px;
 }
-#userName{
+
+#userName {
   font-size: 20px;
 }
-#userGPA{
+
+#userGPA {
   font-size: 18px;
 }
 
-#goToAdd{
+#goToAdd {
   width: 150px;
   font-size: 30px;
   height: auto;
   background-color: pink;
   justify-content: center;
+}
+
+.needs-validation{
+  margin-left: 20px;
 }
