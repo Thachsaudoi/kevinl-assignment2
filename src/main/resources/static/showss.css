@@ -7,6 +7,7 @@
   box-sizing: border-box;
   width: fit-content;
   margin-bottom: 15px;
+  border-radius: 20px;
 }
 
 .outsidebox > ul > li {
@@ -64,6 +65,7 @@
   height: 30px;
   display: inline-block;
   margin-left: 5px;
+  border-radius: 20px;
 }
 
 #userName {
@@ -79,7 +81,10 @@
   font-size: 30px;
   height: auto;
   background-color: pink;
-  justify-content: center;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  border-radius: 20px;
 }
 
 .needs-validation{
